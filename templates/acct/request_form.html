@@ -1,0 +1,52 @@
+﻿<html>
+<title>出团申请单</title>
+<body>
+  <div id='content'>
+    <label>地接社名称：{{ltan}}</label>
+    <label>组团社名称：{{tan}}</label>
+    <label>单据编号：{{sheet_number}}</label><br>
+    <label>线路名称：{{rtfk}}</label>
+    <label>{{rdp}}<a href=''>查看详情</a></label>
+    <label>出团日期：{{ date }}</label><hr>
+  </div>
+  <div id='touristInfo'>
+    游客信息
+    <table>
+      <tr>
+        <td>姓名</td><td>人数</td><td>默认报价</td>
+        <td>修正金额</td><td>最终报价</td><td>修正备注</td>
+        <td>调拨金额</td><td>调拨单位</td><td>调拨备注</td>
+        <td>代收金额</td><td>代收备注</td>
+      </tr>
+    {% for t in tourists %}
+    <tr>
+      <td>{{t.tname}}</td><td>{{t.tnum}}</td><td>{{t.quoted_price}}</td>
+      <td>{{t.fixed_price}}</td><td>{{t.ulti_price}}</td><td>{{t.fixed_remarks}}</td>
+      <td>{{t.transfer_price}}</td><td>{{t.transfer_to_fk.agency_name}}</td><td>{{t.transfer_remarks}}</td>
+      <td>{{t.agency_price}}</td><td>{{t.agency_remarks}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+    <form>
+      {% csrf_token %}
+      
+
+    </form>
+  </div>
+  <hr>
+  <div>
+    结算信息
+    <table>
+        <tr>
+          <td>收款方</td><td>付款方</td><td>结算金额</td><td>业务类型</td>          
+        </tr>
+        {% for j in jiesuan_info %}
+        <tr>
+          <td>{{j.shoukuang_fang}}</td>
+          <td>{{j.fukuang_fang}}</td>
+          <td>{{j.amount}}</td>
+          <td>{{j.yewuleixing}}</td>
+        </tr>
+        {% endfor %}   
+  </div>
+</body>
